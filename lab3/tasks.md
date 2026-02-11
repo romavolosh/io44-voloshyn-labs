@@ -1,3 +1,5 @@
+# SELECT
+
 ## 1. Показати всіх користувачів
 ```sql
 SELECT * FROM users;
@@ -76,5 +78,33 @@ JOIN users ON votes.user_id = users.user_id
 JOIN levels ON votes.level_id = levels.level_id;
 ```
 ![Votes by Users](./src/9.png)
+
+---
+
+# INSERT
+
+## 1. Додавання нового користувача
+```sql
+INSERT INTO users (username) VALUES ('Pro_Gamer_2024');
+SELECT * FROM users;
+```
+![New User](./src/10.png)
+
+---
+
+## 2. Додавання нового рівня
+```sql
+INSERT INTO levels (name, placement, moderation, public) VALUES ('Impossible Mode', 10, TRUE, TRUE);
+```
+![New Level](./src/11.png)
+
+---
+
+## 2. Додавання нового голосу
+```sql
+INSERT INTO votes (user_id, level_id, is_agree) VALUES (3, 6, FALSE);
+SELECT * FROM votes WHERE user_id = 3;
+```
+![New Level](./src/12.png)
 
 ---
