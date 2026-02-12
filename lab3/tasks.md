@@ -100,11 +100,89 @@ INSERT INTO levels (name, placement, moderation, public) VALUES ('Impossible Mod
 
 ---
 
-## 2. Додавання нового голосу
+## 3. Додавання нового голосу
 ```sql
 INSERT INTO votes (user_id, level_id, is_agree) VALUES (3, 6, FALSE);
 SELECT * FROM votes WHERE user_id = 3;
 ```
-![New Level](./src/12.png)
+![New Vote](./src/12.png)
+
+---
+
+# UPDATE
+
+## 1. Оновлення голосу
+```sql
+UPDATE votes
+SET is_agree = TRUE
+WHERE user_id = 3 AND level_id = 6;
+SELECT * FROM VOTES WHERE user_id = 3;
+```
+![Vote update](./src/13.png)
+
+---
+
+## 2. Оновлення Користувача
+```sql
+UPDATE users
+SET username = 'romavolosh'
+WHERE user_id = 1;
+SELECT * FROM USERS WHERE user_id = 1;
+```
+![User update](./src/14.png)
+
+---
+
+## 3. Оновлення Рівня
+```sql
+UPDATE levels
+SET moderation = FALSE,
+    "public" = FALSE
+WHERE level_id = 1;
+SELECT * FROM levels WHERE level_id = 1;
+```
+![Level Update](./src/15.png)
+
+---
+
+# DELETE
+
+## 1. Видалення користувача
+```sql
+DELETE FROM USERS
+WHERE user_id = 2;
+SELECT * FROM USERS WHERE user_id = 2;
+```
+![Level Update](./src/16.png)
+
+---
+
+## 1. Видалення користувача
+```sql
+DELETE FROM USERS
+WHERE user_id = 2;
+SELECT * FROM USERS WHERE user_id = 2;
+```
+![Level Update](./src/16.png)
+
+---
+
+## 2. Видалення Голосу
+```sql
+DELETE FROM VOTES
+WHERE NOT is_agree;
+SELECT * FROM VOTES;
+```
+![Level Update](./src/17.png)
+
+---
+
+## 2. Видалення Рівня
+```sql
+DELETE FROM LEVELS
+WHERE placement > 2;
+SELECT * FROM LEVELS;
+```
+![Level Update](./src/18.png)
 
 ---
