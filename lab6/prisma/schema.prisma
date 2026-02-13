@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model levels {
+  level_id   Int     @id @default(autoincrement())
+  name       String  @db.VarChar(150)
+  placement  Int
+  moderation Boolean @default(false)
+  public     Boolean @default(true)
+  votes      votes[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model users {
+  user_id    Int      @id @default(autoincrement())
+  username   String   @unique @db.VarChar(100)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  votes      votes[]
+}
+
+model vote_types {
+  vote_type_id Int     @id @default(autoincrement())
+  name         String  @unique @db.VarChar(50)
+  weight       Int     @default(0)
+  votes        votes[]
+}
+
+model votes {
+  user_id      Int
+  level_id     Int
+  vote_type_id Int
+  voted_at     DateTime   @default(now()) @db.Timestamp(6)
+  levels       levels     @relation(fields: [level_id], references: [level_id], onDelete: Cascade, onUpdate: NoAction, map: "fk_vote_level")
+  vote_types   vote_types @relation(fields: [vote_type_id], references: [vote_type_id], onUpdate: NoAction, map: "fk_vote_type")
+  users        users      @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "fk_vote_user")
+
+  @@id([user_id, level_id])
+}
